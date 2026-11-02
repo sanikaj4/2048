@@ -1,0 +1,616 @@
+/* ==========================================================================
+   2048: Autumn Theme Stylesheet
+   Autumnal colors, trees, leaves, pumpkins, and rich aesthetic styling
+   Preserves all original text and structure exactly.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800;1,9..144,700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Curated Autumn Palette */
+  --autumn-bg-dark: #1a0e08;
+  --autumn-bg-warm: #2a150b;
+  --autumn-chestnut: #3d2013;
+  --autumn-cider: #b45309;
+  --autumn-pumpkin: #ea580c;
+  --autumn-pumpkin-bright: #f97316;
+  --autumn-amber: #f59e0b;
+  --autumn-gold: #fde047;
+  --autumn-crimson: #dc2626;
+  --autumn-cream: #fef3c7;
+  --autumn-wheat: #faedcd;
+  --autumn-text-light: #fef3c7;
+  --autumn-text-muted: #d4a373;
+  --autumn-border-gold: rgba(245, 158, 11, 0.35);
+}
+
+/* Background Atmosphere */
+html, body {
+  background-color: var(--autumn-bg-dark) !important;
+  color: var(--autumn-text-light) !important;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient Autumn Forest Backdrop */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../assets/autumn_forest_banner.jpg');
+  background-size: cover;
+  background-position: center top;
+  filter: blur(8px) brightness(0.28) saturate(1.3);
+  transform: scale(1.05); /* Prevents blur edge clipping */
+  z-index: -3;
+  pointer-events: none;
+}
+
+/* Ambient Warm Vignette & Hearth Lighting */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse 90% 60% at 50% 10%, rgba(245, 158, 11, 0.16) 0%, transparent 70%),
+    radial-gradient(circle at 50% 100%, rgba(220, 38, 38, 0.14) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(26, 14, 8, 0.5) 0%, rgba(18, 9, 5, 0.85) 100%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Falling Leaves Canvas Layer */
+#autumn-leaves-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Ambient Autumn Forest Silhouette Trees (Left & Right) */
+.ambient-tree {
+  position: fixed;
+  bottom: 0;
+  height: 85vh;
+  max-height: 650px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  transition: opacity 0.5s ease;
+}
+
+.ambient-tree.left-tree {
+  left: 0;
+}
+
+.ambient-tree.right-tree {
+  right: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .ambient-tree {
+    opacity: 0.35;
+    height: 60vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .ambient-tree {
+    display: none;
+  }
+}
+
+/* Main Container */
+.container {
+  position: relative;
+  z-index: 10;
+  margin: 40px auto 60px auto !important;
+}
+
+/* Heading & Title Styling */
+.heading {
+  margin-bottom: 20px !important;
+}
+
+.heading:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+h1.title {
+  font-family: 'Fraunces', serif !important;
+  font-weight: 800 !important;
+  font-size: 80px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  display: block !important;
+  float: left !important;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef08a 25%, #f97316 65%, #dc2626 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 12px rgba(180, 83, 9, 0.45));
+}
+
+/* Score and Best Containers (Rustic Autumn Wood Plaques) */
+.scores-container {
+  float: right;
+  text-align: right;
+  display: flex;
+  gap: 10px;
+}
+
+.score-container, .best-container {
+  background: linear-gradient(160deg, #421c0e 0%, #2a1309 100%) !important;
+  border: 1px solid var(--autumn-border-gold) !important;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  border-radius: 10px !important;
+  padding: 15px 24px !important;
+  min-width: 72px;
+  height: 28px !important;
+  line-height: 38px !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 26px !important;
+  color: var(--autumn-gold) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  position: relative;
+  margin-top: 4px !important;
+  transition: transform 0.2s ease;
+}
+
+.score-container:hover, .best-container:hover {
+  transform: translateY(-2px);
+  border-color: var(--autumn-gold) !important;
+}
+
+.score-container:after, .best-container:after {
+  position: absolute;
+  width: 100%;
+  top: 8px;
+  left: 0;
+  font-family: 'Outfit', sans-serif !important;
+  text-transform: uppercase;
+  font-size: 12px !important;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: var(--autumn-text-muted) !important;
+  text-shadow: none;
+}
+
+.score-container:after {
+  content: "Score" !important;
+}
+
+.best-container:after {
+  content: "Best" !important;
+}
+
+.score-container .score-addition {
+  color: var(--autumn-gold) !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
+  font-size: 26px !important;
+}
+
+/* Above Game Controls */
+.above-game {
+  margin-top: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.above-game:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.game-intro {
+  color: var(--autumn-text-light) !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  font-weight: 500;
+}
+
+.game-intro strong {
+  color: var(--autumn-gold);
+  font-weight: 700;
+}
+
+/* Harvest Buttons (New Game, Try Again, Keep Going) */
+.restart-button, 
+.game-message a {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #9a3412 100%) !important;
+  border: 1px solid rgba(254, 240, 138, 0.35) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  padding: 0 22px !important;
+  height: 42px !important;
+  line-height: 42px !important;
+  box-shadow: 
+    0 4px 16px rgba(234, 88, 12, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer;
+  text-decoration: none !important;
+  display: inline-block !important;
+  text-align: center !important;
+}
+
+.restart-button:hover,
+.game-message a:hover {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%) !important;
+  box-shadow: 
+    0 6px 20px rgba(249, 115, 22, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(-2px);
+  border-color: var(--autumn-gold) !important;
+}
+
+.restart-button:active,
+.game-message a:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   Board Wrapper with Tree Branch Overhang & Pumpkin Patch Base
+   ========================================================================== */
+
+.board-wrapper {
+  position: relative;
+  margin-top: 18px;
+}
+
+.tree-overhang {
+  position: absolute;
+  top: -26px;
+  width: 140px;
+  height: 65px;
+  pointer-events: none;
+  z-index: 25;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.tree-overhang.left-branch {
+  left: -20px;
+  transform: rotate(-4deg);
+}
+
+.tree-overhang.right-branch {
+  right: -20px;
+  transform: scaleX(-1) rotate(-4deg);
+}
+
+.pumpkin-patch-base {
+  position: absolute;
+  bottom: -32px;
+  right: -25px;
+  width: 200px;
+  height: 65px;
+  pointer-events: none;
+  z-index: 30;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7));
+  animation: gentle-pumpkin-sway 4s ease-in-out infinite alternate;
+}
+
+@keyframes gentle-pumpkin-sway {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-3px) rotate(1deg); }
+}
+
+/* ==========================================================================
+   Game Board Container (Warm Cider Cask / Carved Walnut Aesthetic)
+   ========================================================================== */
+
+.game-container {
+  margin-top: 0 !important;
+  background: linear-gradient(155deg, #381b10 0%, #241109 50%, #1a0c06 100%) !important;
+  border: 3px solid rgba(245, 158, 11, 0.35) !important;
+  border-radius: 14px !important;
+  box-shadow: 
+    0 22px 60px rgba(10, 5, 3, 0.85),
+    0 0 35px rgba(245, 158, 11, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.6) !important;
+  position: relative;
+}
+
+/* Empty Grid Cells */
+.grid-cell {
+  background: rgba(30, 14, 8, 0.65) !important;
+  border-radius: 8px !important;
+  box-shadow: 
+    inset 0 3px 8px rgba(0, 0, 0, 0.55),
+    inset 0 1px 2px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(245, 158, 11, 0.08) !important;
+  border: 1px solid rgba(245, 158, 11, 0.08);
+}
+
+/* ==========================================================================
+   Tiles: Autumnal Color Transitions & Glow
+   Pure original numbers, with rich fall colors and textures
+   ========================================================================== */
+
+.tile .tile-inner {
+  border-radius: 8px !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 800 !important;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 0.1s ease;
+}
+
+/* Tile 2: Cream Birch & Sprout */
+.tile.tile-2 .tile-inner {
+  background: linear-gradient(145deg, #fefae0 0%, #faedcd 100%) !important;
+  color: #5c3818 !important;
+  border: 1px solid rgba(212, 163, 115, 0.4);
+}
+
+/* Tile 4: Roasted Acorn & Wheat */
+.tile.tile-4 .tile-inner {
+  background: linear-gradient(145deg, #fef08a 0%, #fed7aa 50%, #fcd34d 100%) !important;
+  color: #451a03 !important;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Tile 8: Amber Maple Leaf */
+.tile.tile-8 .tile-inner {
+  background: linear-gradient(145deg, #fb923c 0%, #ea580c 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Tile 16: Spiced Cinnamon Chai */
+.tile.tile-16 .tile-inner {
+  background: linear-gradient(145deg, #f97316 0%, #c2410c 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 5px 18px rgba(194, 65, 12, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Tile 32: Harvest Pumpkin */
+.tile.tile-32 .tile-inner {
+  background: linear-gradient(145deg, #fbbf24 0%, #f97316 50%, #dc2626 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 6px 22px rgba(234, 88, 12, 0.6),
+    0 0 15px rgba(251, 191, 36, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Tile 64: Crimson Red Oak */
+.tile.tile-64 .tile-inner {
+  background: linear-gradient(145deg, #ef4444 0%, #b91c1c 60%, #7f1d1d 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 6px 24px rgba(185, 28, 28, 0.65),
+    0 0 20px rgba(239, 68, 68, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Tile 128: Mulled Wine & Berry */
+.tile.tile-128 .tile-inner {
+  background: linear-gradient(145deg, #d946ef 0%, #a21caf 60%, #701a75 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    0 6px 28px rgba(162, 28, 175, 0.7),
+    0 0 25px rgba(217, 70, 239, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Tile 256: Cozy Campfire Flame */
+.tile.tile-256 .tile-inner {
+  background: linear-gradient(145deg, #f43f5e 0%, #e11d48 40%, #ea580c 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    0 8px 32px rgba(225, 29, 72, 0.75),
+    0 0 30px rgba(245, 158, 11, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* Tile 512: Golden Forest Solstice */
+.tile.tile-512 .tile-inner {
+  background: linear-gradient(145deg, #fef08a 0%, #eab308 45%, #b45309 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(69, 26, 3, 0.8);
+  box-shadow: 
+    0 8px 36px rgba(234, 179, 8, 0.8),
+    0 0 35px rgba(234, 179, 8, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Tile 1024: Autumn Apple Orchard */
+.tile.tile-1024 .tile-inner {
+  background: linear-gradient(145deg, #f43f5e 0%, #be123c 50%, #4c0519 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  box-shadow: 
+    0 8px 40px rgba(190, 18, 60, 0.85),
+    0 0 35px rgba(244, 63, 94, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Tile 2048: Golden Harvest Pumpkin Tile */
+.tile.tile-2048 .tile-inner {
+  background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 25%, #f59e0b 60%, #c2410c 100%) !important;
+  color: #451a03 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+  border: 2px solid #fff;
+  box-shadow: 
+    0 0 45px rgba(245, 158, 11, 0.95),
+    0 0 25px rgba(254, 240, 138, 0.8),
+    inset 0 0 15px rgba(255, 255, 255, 0.7);
+  animation: harvest-pulse 2s ease-in-out infinite alternate !important;
+}
+
+@keyframes harvest-pulse {
+  0% {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.8), 0 0 15px rgba(254, 240, 138, 0.6);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 55px rgba(249, 115, 22, 1), 0 0 30px rgba(254, 240, 138, 0.9);
+    transform: scale(1.02);
+  }
+}
+
+/* Super Tiles (4096+) */
+.tile.tile-super .tile-inner {
+  background: linear-gradient(135deg, #1e1b4b 0%, #701a75 50%, #78350f 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 0 45px rgba(192, 38, 211, 0.85);
+}
+
+/* Merged Tile Animation */
+@keyframes fall-pop {
+  0% { transform: scale(0.6); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+.tile-merged .tile-inner {
+  animation: fall-pop 240ms cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* ==========================================================================
+   Game Over & Victory Overlay Screens
+   ========================================================================== */
+
+.game-message {
+  background: rgba(26, 14, 8, 0.92) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 2px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.game-message p {
+  font-family: 'Fraunces', serif !important;
+  font-weight: 800 !important;
+  color: var(--autumn-gold) !important;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(245, 158, 11, 0.6);
+}
+
+.game-message.game-won {
+  background: rgba(42, 21, 11, 0.94) !important;
+  border-color: var(--autumn-gold) !important;
+}
+
+/* ==========================================================================
+   How To Play, Note, and Credits Styling (Preserves original text)
+   ========================================================================== */
+
+.game-explanation {
+  margin-top: 35px !important;
+  line-height: 1.65 !important;
+  color: var(--autumn-text-light) !important;
+}
+
+.game-explanation strong.important,
+p strong.important {
+  color: var(--autumn-gold);
+}
+
+hr {
+  border: none !important;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.25) !important;
+  margin-top: 20px !important;
+  margin-bottom: 30px !important;
+}
+
+p {
+  color: var(--autumn-text-light) !important;
+  line-height: 1.65 !important;
+}
+
+p a {
+  color: var(--autumn-gold) !important;
+  transition: color 0.2s ease;
+}
+
+p a:hover {
+  color: #fff !important;
+}
+
+/* ==========================================================================
+   Mobile & Responsive Adjustments
+   ========================================================================== */
+
+@media screen and (max-width: 520px) {
+  h1.title {
+    font-size: 42px !important;
+  }
+
+  .score-container, .best-container {
+    padding: 10px 14px !important;
+    font-size: 18px !important;
+    min-width: 48px !important;
+    height: 24px !important;
+    line-height: 30px !important;
+  }
+
+  .score-container:after, .best-container:after {
+    font-size: 10px !important;
+    top: 4px !important;
+  }
+
+  .game-intro {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+  }
+
+  .restart-button {
+    font-size: 13px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    padding: 0 14px !important;
+  }
+
+  .tree-overhang {
+    width: 90px;
+    height: 42px;
+    top: -16px;
+  }
+  .tree-overhang.left-branch { left: -10px; }
+  .tree-overhang.right-branch { right: -10px; }
+
+  .pumpkin-patch-base {
+    width: 130px;
+    height: 45px;
+    bottom: -20px;
+    right: -10px;
+  }
+}
